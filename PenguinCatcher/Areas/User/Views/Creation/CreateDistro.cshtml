@@ -1,0 +1,39 @@
+﻿@model DistroViewModel
+
+<form method="post" asp-controller="Creation" asp-action="CreateDistro">
+    <div class="row mb-2">
+        <label class="col-form-label col-md-2">Enter the distribution's name: </label>
+        
+        <div class="col-md-4">
+            <input asp-for="DistroName" class="form-control" />
+        </div>
+    </div>
+    
+    <div class="row mb-2">
+        <label class="col-form-label col-md-2">Enter the distribution's release cycle: </label>
+
+        <div class="col-md-4">
+            <input asp-for="ReleaseCycle" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <label class="col-form-label col-md-2">Enter the distribution's developer: </label>
+
+        <div class="col-md-4">
+            <input asp-for="Developer" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <label class="col-form-label col-md-2">Enter the distribution's website URL: </label>
+
+        <div class="col-md-4">
+            <input asp-for="DistroUrl" class="form-control" />
+        </div>
+    </div>
+
+    <input type="submit" value="Create" class="btn btn-primary" />
+</form>
+
+<a class="btn" asp-area="User" asp-controller="Dashboard" asp-action="Index">Cancel</a>

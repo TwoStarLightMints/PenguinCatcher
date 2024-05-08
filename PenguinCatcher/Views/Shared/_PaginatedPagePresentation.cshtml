@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model PenguinCatcher.Models.PaginatedPage<Post>
+
+@if (ViewBag.Pages != null)
+{
+    @RenderBody();
+
+    @if (!(ViewBag.Pages.HasNextPage == false && ViewBag.Pages.HasPrevious == false))
+    {
+        <div class="container row align-items-center justify-content-center">
+            <a class="btn btn-primary flex-grow-0 col-1 @(ViewBag.Pages.HasPrevious ? "" : "disabled")" asp-area="" asp-controller="Posts" asp-action="Page" asp-route-pageNum="@(ViewBag.Pages.PageIndex - 1)">Prev</a>
+            <p class="col-1 mb-0 mx-2 py-1 border">@ViewBag.Pages.PageIndex / @ViewBag.Pages.TotalPages</p>
+            <a class="btn btn-primary flex-grow-0 col-1 @(ViewBag.Pages.HasNextPage ? "" : "disabled")" asp-area="" asp-controller="Posts" asp-action="Page" asp-route-pageNum="@(ViewBag.Pages.PageIndex + 1)">Next</a>
+        </div>
+    }
+}

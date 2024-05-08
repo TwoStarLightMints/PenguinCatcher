@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "_PaginatedPagePresentation";
+}
+
+@foreach ((PenguinCatcherUser, bool) user in ViewBag.Pages)
+{
+    if (user.Item1.Id == ViewBag.CurrUserId)
+    {
+        <div class ="container row align-items-center justify-content-center border m-1 p-2">
+            <p class="col">Username: @user.Item1.UserName</p> <p class="col">Role: @(user.Item2 ? "Admin" : "User")</p>
+        </div>
+    }
+    else
+    {
+        <div class ="container row align-items-center justify-content-center border m-1 p-2">
+            <p class="col">Username: @user.Item1.UserName</p> <p class="col">Role: @(user.Item2 ? "Admin" : "User")</p> <a class="col btn btn-primary flex-grow-0" asp-area="Admin" asp-controller="Administration" asp-action="DeleteUser" asp-route-userId="@user.Item1.Id">Delete</a>
+        </div>
+    }
+}

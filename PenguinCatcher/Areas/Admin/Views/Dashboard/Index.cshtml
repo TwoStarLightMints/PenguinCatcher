@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h1>Weclome back @User.Identity.Name!</h1>
+
+<a class="btn btn-primary" asp-area="Admin" asp-action="ViewUsers" asp-controller="Administration">View users</a>
+<a class="btn btn-primary" asp-area="Admin" asp-action="CreateUser" asp-controller="Administration">Create a user</a>
+<a class="btn btn-primary" asp-area="Admin" asp-action="ViewPosts" asp-controller="Administration">View posts</a>
+<a class="btn btn-primary" asp-area="Admin" asp-action="ViewComments" asp-controller="Administration">View comments</a>

@@ -1,0 +1,17 @@
+﻿@model PaginatedPage<Comment>;
+
+@foreach (var comment in Model)
+{
+    <div class="container row align-items-center justify-content-center border m-1 p-2">
+        <p class="col">@comment.User.UserName</p> <p class="col">@comment.Content</p> <a class="btn btn-primary col-2" asp-area="Admin" asp-action="DeleteComment" asp-controller="Administration" asp-route-commentId="@comment.CommentId">Delete</a>
+    </div>
+}
+
+@if (!(Model.HasNextPage == false && Model.HasPrevious == false))
+{
+    <div class="conatiner row align-items-center justify-content-center">
+        <a class="btn btn-primary flex-grow-0 col-1 @(Model.HasPrevious ? "" : "disabled")" asp-area="Admin" asp-controller="Adminisrtation" asp-action="ViewComments" asp-route-pageNum="@(Model.PageIndex - 1)">Prev</a>
+        <p class="col-1 mb-0 mx-2 py-1 border">@Model.PageIndex / @Model.TotalPages</p>
+        <a class="btn btn-primary flex-grow-0 col-1 @(Model.HasNextPage ? "" : "disabled")" asp-area="Admin" asp-controller="Administration" asp-action="ViewComments" asp-route-pageNum="@(Model.PageIndex + 1)">Next</a>
+    </div>
+}

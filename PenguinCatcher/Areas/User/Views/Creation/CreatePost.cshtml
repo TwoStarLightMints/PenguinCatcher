@@ -1,0 +1,21 @@
+﻿@model PostViewModel
+
+<form method="post" asp-controller="Creation" asp-action="CreatePost">
+    <div class="row mb-2">
+        <label class="col-form-label col-md-2">Enter the distribution's name: </label>
+
+        <div class="col-md-4">
+            <input asp-for="DistroName" class="form-control" />
+        </div>
+
+        <label class="col-form-label col-md-2">Enter the content of the post: </label>
+
+        <div class="col-md-4">
+            <textarea class="form-control" asp-for="Content"></textarea>
+        </div>
+    </div>
+
+    <input type="submit" value="Create" class="btn btn-primary" />
+</form>
+
+<a class="btn" asp-area="User" asp-controller="Dashboard" asp-action="Index">Cancel</a>

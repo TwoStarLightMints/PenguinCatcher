@@ -1,0 +1,10 @@
+﻿@model PenguinCatcher.Models.ViewModels.CommentViewModel
+
+<h1>You're Here!</h1>
+
+<form method="post" asp-controller="Posts" asp-action="Comment">
+    <label>Comment on this post @Model.PostId: </label>
+    <textarea class="form-control" asp-for="Content"></textarea>
+    <input type="hidden" asp-for="PostId" value="@Model.PostId" />
+    <input type="submit" class="form-control" />
+</form>

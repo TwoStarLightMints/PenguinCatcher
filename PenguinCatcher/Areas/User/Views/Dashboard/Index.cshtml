@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "User Dashboard";
+}
+
+@model List<PenguinCatcher.Models.DomainModels.Post>
+
+<h1>Welcome back, @User.Identity.Name!</h1>
+
+<div class="container row">
+    <div class="d-flex flex-column align-items-center col me-3 border  p-2">
+        <h2>Your Recently Created Posts</h2>
+
+        @if (Model.Count > 0)
+        {
+            foreach (var post in Model.Take(3))
+            {
+                <div class="container border mb-3">
+                    <p>@post.Content</p>
+                    <p>Date posted: @post.DatePosted</p>
+                </div>
+            }
+
+            <a class="btn btn-primary" asp-area="User" asp-action="UserPosts" asp-controller="Post">View the rest here!</a>
+        }
+        else
+        {
+            <p>You do not have any posts yet</p>
+        }
+    </div>
+
+    <div class="d-flex flex-column col border p-2 justify-content-center align-items-center">
+        <h2 class="">Make something new!</h2>
+        <div class="">
+            <a class="btn btn-primary col flex-grow-0" class="btn btn-primary" asp-area="User" asp-controller="Creation" asp-action="CreateDistro">Create a new Distro</a>
+            <a class="btn btn-primary col flex-grow-0" class="btn btn-primary" asp-area="User" asp-controller="Creation" asp-action="CreatePost">Create a new Post</a>
+        </div>
+    </div>
+</div>

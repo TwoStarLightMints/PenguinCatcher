@@ -1,0 +1,49 @@
+﻿@model Post
+
+<div class="container border-bottom mb-3 row">
+    <h1>Post by: @Model.User.UserName</h1>
+    <h2>Distribution: @Model.Distribution.DistroName | <a href="@Model.Distribution.DistroURL">Distro Website</a></h2>
+    <h3>At: @Model.DatePosted</h3>
+    <p>@Model.Content</p>
+</div>
+
+
+<div class="container row align-items-center mb-3 gap-5">
+    @if ((User.Identity!).IsAuthenticated)
+    {
+            <p class="col">Likes: @Model.Likes.Count</p>
+            <a class="btn btn-primary btn-sm flex-grow-0 col-1" asp-area="" asp-controller="Posts" asp-action="Like" asp-route-postId="@Model.PostID" asp-route-goodBad="@(Model.Likes.Where(l => l.UserId == ViewBag.CurrUserID).ToList().Count > 0 ? "dislike" : "like")">
+                @(Model.Likes.Where(l => l.UserId == ViewBag.CurrUserID).ToList().Count > 0 ? "Remove like" : "Like this post!")
+            </a>
+
+            <p class="col">@Model.Comments.Count @(@Model.Comments.Count > 1 ? "Comments" : "Comment")</p>
+            <a class="btn btn-primary btn-sm flex-grow-0 col-2" asp-area="" asp-controller="Posts" asp-action="Comment" asp-route-postId="@Model.PostID">Write a comment!</a>
+    }
+    else
+    {
+            <p class="col">Likes: @Model.Likes.Count</p>
+            <p class="col">@Model.Comments.Count @(@Model.Comments.Count > 1 ? "Comments" : "Comment")</p>
+            <a class="btn btn-primary btn-sm flex-grow-0 col-2" asp-area="" asp-controller="Account" asp-action="Login">Login to join the conversation!</a>
+    
+    
+    }
+</div>
+
+<div class="container row">
+    @if (Model.Comments.Count > 0)
+    {
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="container row border m-0 p-0">
+                <p>Comment by: @comment.User.UserName</p>
+                <p>@comment.Content</p>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="container row border m-0 p-0">
+            <p>No comments yet</p>
+        </div>
+    }
+</div>

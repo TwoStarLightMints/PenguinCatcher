@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "_PaginatedPagePresentation";
+}
+
+@if (ViewBag.Pages != null)
+{
+    @foreach (Post post in ViewBag.Pages)
+    {
+        <div class="container row align-items-center justify-content-center border m-1 p-2">
+            <p class="col text-center">@post.Distribution.DistroName</p> <p class="col text-center">@(post.Content.Length < 20 ? @post.Content : @post.Content.Substring(0, 20) + "...")</p> <p class="col text-center">Post by: @post.User.UserName</p> <a class="btn btn-primary col-2 text-center" asp-area="" asp-controller="Posts" asp-action="Post" asp-route-postId="@post.PostID">View whole post here</a>
+        </div>
+    }
+}
