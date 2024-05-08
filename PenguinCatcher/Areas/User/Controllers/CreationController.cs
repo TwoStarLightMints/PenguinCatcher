@@ -34,7 +34,10 @@ namespace PenguinCatcher.Areas.User.Controllers
             if (ModelState.IsValid)
             {
                 Distribution newDistro = new Distribution { DistroName = distribution.DistroName, Developer = distribution.Developer, DistroURL = distribution.DistroUrl, ReleaseCycle = distribution.ReleaseCycle };
-                _context.Add(newDistro);
+                
+                if (_context.Distributions.Where(d => d.DistroName == newDistro.DistroName).ToList().Count == 0)
+                    _context.Add(newDistro);
+                
                 await _context.SaveChangesAsync();
 
                 return Redirect("/User/Dashboard/Index");
@@ -46,6 +49,8 @@ namespace PenguinCatcher.Areas.User.Controllers
         [HttpGet]
         public IActionResult CreatePost()
         {
+            ViewBag.AvailableDistros = _context.Distributions.ToList();
+
             return View(new PostViewModel());
         }
 
