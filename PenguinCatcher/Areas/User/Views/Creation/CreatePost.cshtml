@@ -5,7 +5,12 @@
         <label class="col-form-label col-md-2">Enter the distribution's name: </label>
 
         <div class="col-md-4">
-            <input asp-for="DistroName" class="form-control" />
+            <select asp-for="DistroName">
+                @foreach (Distribution distro in ViewBag.AvailableDistros)
+                {
+                    <option value="@distro.DistroName.ToLower()">@distro.DistroName</option>
+                }
+            </select>
         </div>
 
         <label class="col-form-label col-md-2">Enter the content of the post: </label>
